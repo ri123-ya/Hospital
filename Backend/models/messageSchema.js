@@ -15,7 +15,6 @@ const messageSchema = new mongoose.Schema({
   email: {
     type: String,
     required: true,
-    unique: true,
     validate: [validator.isEmail, "Provide A Valid Email!"],
   },
   phone: {
