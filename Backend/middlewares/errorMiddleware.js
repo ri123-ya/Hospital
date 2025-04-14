@@ -6,6 +6,7 @@ class ErrorHandler extends Error {
 }
 
 export const errorMiddleware = (err, req, res, next) => {
+    // console.error("💥 Error:", err); //debugging
     err.message = err.message || "Internal Server Error";
     err.statusCode = err.statusCode || 500;
 
@@ -27,7 +28,7 @@ export const errorMiddleware = (err, req, res, next) => {
 
     //error in type of field name string but entered number
     if (err.name === "CastError") {
-        const message = `Invalid ${err.path}`,
+        const message = `Invalid ${err.path}`;
         err = new ErrorHandler(message, 400);
     }
 
