@@ -4,9 +4,10 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import { dbConnection } from "./database/dbConnection.js";
-import messageRouter from "./router/messageRouter.js";
 import { errorMiddleware } from "./middlewares/errorMiddleware.js"
-
+import messageRouter from "./router/messageRouter.js";
+import userRouter from "./router/userRouter.js";
+import appointmentRouter from "./router/appointmentRouter.js"
 
 
 
@@ -27,12 +28,14 @@ app.use(express.json()); // converts json.string into json.object
 app.use(express.urlencoded({ extended: true }));// parse data form html form 
 
 app.use(fileUpload({
-    useTemplate: true,
+    useTempFiles: true,
     createFileDir: "/tmp/",
 }));
 
 /***********Routes ****************/
 app.use("/api/v1/message", messageRouter);
+app.use("/api/v1/user", userRouter);
+app.use("/api/v1/appointment", appointmentRouter);
 
 dbConnection();
 
